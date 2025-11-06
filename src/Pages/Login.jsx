@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
-import '../assets/css/login.module.css'
+import '../assets/css/login.css'
+import toast,{ Toaster } from "react-hot-toast"
 
 const Login = () => {
     const navigate = useNavigate()
@@ -14,16 +15,21 @@ const Login = () => {
     },[])
 
     function checkUser(data){
-        console.log(data)
+        // console.log(data)
         if(user && user.length > 0){
-            user.find(ele=>{
-                console.log(ele.email,data.email)
-                if(ele.email == data.username && ele.pass == data.pass){
-                    navigate('/home')
-                }else{
-                    alert("Username or Password not Valid....!")
-                }
+            const singleUser = user.find(ele=>{
+              return ele.email == data.username
             })
+
+            if(singleUser){
+              if(singleUser.email == data.username && singleUser.pass == data.pass){
+                navigate('/home')
+              }else{
+                toast.error('Username OR Password is Invalis....!')  
+              }
+            }else{
+              toast.error('Username not Found!')
+            }
         }
         else{
             alert("Username not Found.....!")
@@ -31,15 +37,18 @@ const Login = () => {
     }
   return (
     <>
-      <form onSubmit={handleSubmit(checkUser)} className="col-lg-3 my-5 p-5 m-auto rounded-5">
-        <h1 className="text-center text-capitalize">login</h1>
-        <label htmlFor="username" className="text-capitalize form-label">username</label>
-        <input type="text" {...register("username")} className="form-control mb-3" placeholder="Enter Username" id="username" autoFocus />
-        <label htmlFor="pass" className="text-capitalize form-label">password</label>
-        <input type="password" {...register("pass")} className="form-control mb-3" placeholder="Enter pass" id="pass" />
-        <p className="text-end text-capitalize">don't have account <a href='/register' >register</a> </p>
-        <button className="btn btn-primary w-100 mb-3">submit</button>
-      </form>
+    <div className="login d-flex align-content-center overflow-hidden">
+        <form onSubmit={handleSubmit(checkUser)} className="col-lg-3 p-5 m-auto rounded-5">
+          <h1 className="text-center text-capitalize">login</h1>
+          <label htmlFor="username" className="text-capitalize form-label">username</label>
+          <input type="text" {...register("username")} className="form-control mb-3" placeholder="Enter Username" id="username" autoFocus />
+          <label htmlFor="pass" className="text-capitalize form-label">password</label>
+          <input type="password" {...register("pass")} className="form-control mb-3" placeholder="Enter pass" id="pass" />
+          <p className="text-end text-capitalize">don't have account <a href='/register' >register</a> </p>
+          <button className="btn btn-primary w-100 mb-3">submit</button>
+        </form>
+    </div>
+    <Toaster/>
     </>
   )
 }

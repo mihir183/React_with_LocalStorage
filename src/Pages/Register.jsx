@@ -44,19 +44,21 @@ const Register = () => {
     }
   return (
     <>
-      <form onSubmit={handleSubmit(addData)} className="col-lg-3 my-5 p-5 m-auto rounded-5">
-      <h1 className="text-center text-capitalize">Register</h1>
-        <label htmlFor="username" className="text-capitalize form-label">username</label>
-        <input type="text" {...register("username")} className="form-control mb-3" placeholder="Enter Username" id="username" />
-        <label htmlFor="email" className="text-capitalize form-label">email</label>
-        <input type="email" {...register("email")} className="form-control mb-3" placeholder="Enter email" id="email" />
-        <label htmlFor="pass" className="text-capitalize form-label">password</label>
-        <input type="password" {...register("pass")} className="form-control mb-3" placeholder="Enter pass" id="pass" />
-        <label htmlFor="pass1" className="text-capitalize form-label">password</label>
-        <input type="password" {...register("pass1")} className="form-control mb-3" placeholder="Enter pass" id="pass1" />
-        <p className="text-end text-capitalize">have an account <a href="/">login</a></p>
-        <button className="btn btn-primary w-100 mb-3">submit</button>
-      </form>
+    <div className="register d-flex align-items-center">
+        <form onSubmit={handleSubmit(addData)} className="col-lg-3 my-5 p-5 m-auto rounded-5">
+        <h1 className="text-center text-capitalize">Register</h1>
+          <label htmlFor="username" className="text-capitalize form-label">username</label>
+          <input type="text" {...register("username")} className="form-control mb-3" placeholder="Enter Username" id="username" autoFocus />
+          <label htmlFor="email" className="text-capitalize form-label">email</label>
+          <input type="email" {...register("email")} className="form-control mb-3" placeholder="Enter email" id="email" />
+          <label htmlFor="pass" className="text-capitalize form-label">password</label>
+          <input type="password" {...register("pass")} className="form-control mb-3" placeholder="Enter pass" id="pass" />
+          <label htmlFor="pass1" className="text-capitalize form-label">comfirm password</label>
+          <input type="password" {...register("pass1")} className="form-control mb-3" placeholder="Enter pass" id="pass1" />
+          <p className="text-end text-capitalize">have an account <a href="/">login</a></p>
+          <button className="btn btn-primary w-100 mb-3">submit</button>
+        </form>
+    </div>
     </>
   )
 }
